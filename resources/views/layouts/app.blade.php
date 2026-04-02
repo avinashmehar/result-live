@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Result Management System')</title>
-    
+
     <!-- Google Fonts: Inter (Professional UI) & Outfit (Brand) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- Bootstrap & Icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <style>
         :root {
             --primary-color: #4f46e5;
@@ -27,9 +27,9 @@
             --sidebar-collapsed-width: 80px;
         }
 
-        body { 
-            background-color: var(--light-bg); 
-            font-family: 'Inter', sans-serif; 
+        body {
+            background-color: var(--light-bg);
+            font-family: 'Inter', sans-serif;
             color: #1e293b;
             overflow-x: hidden;
             letter-spacing: -0.01em;
@@ -40,12 +40,12 @@
         }
 
         /* Sidebar Styles */
-        .sidebar { 
-            height: 100vh; 
-            background: var(--dark-color); 
-            color: #fff; 
-            width: var(--sidebar-width); 
-            position: fixed; 
+        .sidebar {
+            height: 100vh;
+            background: var(--dark-color);
+            color: #fff;
+            width: var(--sidebar-width);
+            position: fixed;
             left: 0;
             top: 0;
             z-index: 1050;
@@ -81,7 +81,7 @@
             margin-right: 12px;
             transition: margin 0.3s;
         }
-        
+
         .sidebar-header h4 span {
             transition: opacity 0.2s, display 0.2s;
         }
@@ -128,10 +128,10 @@
             display: none;
         }
 
-        .sidebar a { 
-            color: #94a3b8; 
-            text-decoration: none; 
-            padding: 12px 16px; 
+        .sidebar a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 12px 16px;
             display: flex;
             align-items: center;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -142,8 +142,8 @@
             font-weight: 500;
         }
 
-        .sidebar a i { 
-            font-size: 1.25rem; 
+        .sidebar a i {
+            font-size: 1.25rem;
             width: 24px;
             text-align: center;
             margin-right: 12px;
@@ -170,11 +170,11 @@
             display: none;
         }
 
-        .sidebar a:hover { 
-            background: rgba(255,255,255,0.05); 
-            color: #fff; 
+        .sidebar a:hover {
+            background: rgba(255,255,255,0.05);
+            color: #fff;
         }
-        
+
         .sidebar a.active {
             background: var(--primary-color);
             color: #fff;
@@ -236,26 +236,26 @@
         }
 
         @media (max-width: 992px) {
-            .sidebar { 
-                transform: translateX(-100%); 
-                width: 280px; 
+            .sidebar {
+                transform: translateX(-100%);
+                width: 280px;
             }
-            body.mobile-sidebar-active .sidebar { 
-                transform: translateX(0); 
+            body.mobile-sidebar-active .sidebar {
+                transform: translateX(0);
             }
             body.mobile-sidebar-active .sidebar-overlay {
                 opacity: 1;
                 visibility: visible;
             }
-            .main-wrapper { 
-                margin-left: 0 !important; 
+            .main-wrapper {
+                margin-left: 0 !important;
             }
             .top-navbar {
                 padding: 0 1rem;
                 height: 60px;
             }
-            .sidebar-toggle { 
-                margin-right: 0.5rem; 
+            .sidebar-toggle {
+                margin-right: 0.5rem;
             }
             main.p-4 { padding: 1.5rem !important; }
         }
@@ -264,7 +264,7 @@
             .sidebar, .top-navbar, .no-print { display: none !important; }
             .main-wrapper { margin-left: 0 !important; padding: 0 !important; width: 100% !important; }
         }
-        
+
         /* Dark Mode Overrides for Admin Only */
         body.admin-body.dark-mode {
             --bg-main: #0f172a;
@@ -306,7 +306,7 @@
             border-color: var(--border-color) !important;
         }
 
-        body.admin-body.dark-mode .table td, 
+        body.admin-body.dark-mode .table td,
         body.admin-body.dark-mode .table th {
             background-color: var(--card-bg) !important;
             border-bottom-color: var(--border-color) !important;
@@ -356,15 +356,15 @@
             color: #94a3b8 !important;
         }
 
-        
+
         body.admin-body.dark-mode .text-dark {
             color: var(--text-main) !important;
         }
-        
+
         body.admin-body.dark-mode .top-navbar .btn {
             color: var(--text-main);
         }
-        
+
         body.admin-body.dark-mode .border {
             border-color: var(--border-color) !important;
         }
@@ -390,9 +390,9 @@
             <a href="{{ route('admin.results.index') }}" class="{{ request()->routeIs('admin.results.*') ? 'active' : '' }}">
                 <i class="fas fa-database"></i> <span>Manage Results</span>
             </a>
-            <a href="{{ route('admin.template.index') }}" class="{{ request()->routeIs('admin.template.*') ? 'active' : '' }}">
+            {{-- <a href="{{ route('admin.template.index') }}" class="{{ request()->routeIs('admin.template.*') ? 'active' : '' }}">
                 <i class="fas fa-magic"></i> <span>Result Designer</span>
-            </a>
+            </a> --}}
             <a href="{{ route('admin.settings.index') }}" class="{{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">
                 <i class="fas fa-sliders-h"></i> <span>System Settings</span>
             </a>
@@ -446,7 +446,7 @@
     <!-- Scripts -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/material_blue.css">
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -477,7 +477,7 @@
             $('#sidebarOverlay').on('click', function() {
                 $('body').removeClass('mobile-sidebar-active');
             });
-            
+
             // Fallback: Close mobile sidebar when clicking outside (on very small screens if overlay misses)
             $(document).on('click', function(e) {
                 if ($(window).width() <= 992) {
@@ -486,7 +486,7 @@
                     }
                 }
             });
-            
+
             // Dark Mode Logic (Admin Only)
             if ($('body').hasClass('admin-body')) {
                 const darkMode = localStorage.getItem('adminDarkMode');
